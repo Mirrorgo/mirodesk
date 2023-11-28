@@ -15,7 +15,7 @@ const Console: FC<ConsoleProps> = ({ open, onClose, showSetting }) => {
   const [isCustomizing, setIsCustomizing] = useState(false);
   return (
     <Drawer
-      title="Console"
+      title="Console!"
       placement="top"
       closable={false}
       onClose={onClose}
