@@ -3,7 +3,10 @@ import { FC, useState } from "react";
 import settingLogo from "/public/setting.svg";
 import customizeLogo from "/public/customize.svg";
 import "/src/styles/base.less";
+import "./index.less";
 import classnames from "classnames";
+import useConfigStore from "@/store/global";
+import { formatURL } from "@/utils/tools";
 
 type ConsoleProps = {
   open: boolean;
@@ -13,9 +16,10 @@ type ConsoleProps = {
 
 const Console: FC<ConsoleProps> = ({ open, onClose, showSetting }) => {
   const [isCustomizing, setIsCustomizing] = useState(false);
+  const sites = useConfigStore((state) => state.configData.consoleConfig.sites);
   return (
     <Drawer
-      title="Console!"
+      title="Console"
       placement="top"
       closable={false}
       onClose={onClose}
@@ -48,7 +52,37 @@ const Console: FC<ConsoleProps> = ({ open, onClose, showSetting }) => {
         </Space>
       }
     >
-      <div>test</div>
+      {/* 核心部分 */}
+      <div
+        style={{
+          display: "flex",
+          flexWrap: "wrap",
+          gap: "10px",
+          width: "200px",
+        }}
+      >
+        {sites.map((cur, idx) => (
+          <div key={`${cur.domain}${idx}`}>
+            {/* TODO: 需要自己维护一个高清图标库:infinity是这样的,有个用户上传的图标库 */}
+            <Tooltip title={cur.name}>
+              {/* rel="noopener noreferrer" 用于安全性考虑，防止打开的页面访问 window.opener */}
+              {/* https://juejin.cn/post/6844904116892745735 */}
+              <a
+                target="_blank"
+                href={formatURL(cur.domain)}
+                rel="noopener noreferrer"
+              >
+                <img
+                  src={`https://www.google.com/s2/favicons?domain=${cur.domain}`}
+                  alt="customize logo"
+                  className={classnames("img__site", "cursor-pointer")}
+                />
+              </a>
+            </Tooltip>
+          </div>
+        ))}
+      </div>
+
       {/* 在右下角添加按钮 */}
       <div
         style={{ position: "absolute", bottom: 0, right: 0, padding: "16px" }}

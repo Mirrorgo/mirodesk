@@ -1,18 +1,20 @@
 import { BaseSyntheticEvent, useEffect, useState } from "react";
 import "./index.less"; // 导入样式文件
 import jsonData from "./data.ts";
+import useConfigStore from "@/store/global.ts";
 
 const JsonEditor = () => {
   // TODO: 支持json格式化
   const [jsonValue, setJsonValue] = useState(""); // 初始化为空字符串
+  const configData = useConfigStore((state) => state.configData);
 
+  // TODO: 这里的高度看上去不对劲
   // 加载 JSON 数据
   useEffect(() => {
-    // 模拟异步加载过程，实际情况中可能是从服务器获取数据
     // TODO: 服务器获取一次,后续每次都只在本地修改,然后推送到云端
-    setTimeout(() => {
-      setJsonValue(JSON.stringify(jsonData, null, 2)); // 设置格式化的 JSON 到状态中
-    }, 100); // 假设延迟加载 JSON 数据.1秒钟
+    setJsonValue(
+      JSON.stringify(configData, null, 2) // 设置格式化的 JSON 到状态中
+    );
   }, []);
 
   const handleInputChange = (event: BaseSyntheticEvent) => {
