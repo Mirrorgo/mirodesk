@@ -1,6 +1,5 @@
 import { BaseSyntheticEvent, useEffect, useState } from "react";
 import "./index.less"; // 导入样式文件
-import jsonData from "./data.ts";
 import useConfigStore from "@/store/global.ts";
 
 const JsonEditor = () => {
@@ -30,7 +29,7 @@ const JsonEditor = () => {
     <div className="json-editor">
       <div className="line-numbers">
         {/* 生成行号 */}
-        {lines.map((line, index) => (
+        {lines.map((_line, index) => (
           <div key={index} className="line-number">
             {index + 1}
           </div>
