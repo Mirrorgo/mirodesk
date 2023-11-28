@@ -1,33 +1,46 @@
+import { Typography } from "antd";
+import "./styles/base.less";
 import { useState } from "react";
-import reactLogo from "./assets/react.svg";
-import viteLogo from "/vite.svg";
-import "./App.css";
+import { CaretDownFilled } from "@ant-design/icons";
+import Console from "./components/Console";
+import Setting from "./components/Setting";
 
 function App() {
-  const [count, setCount] = useState(0);
+  // console
+  const [isConsoleOpen, setIsConsoleOpen] = useState(false);
+  // setting
+  const [isSettingOpen, setIsSettingOpen] = useState(false);
+
+  // console
+  const showConsole = () => {
+    setIsConsoleOpen(true);
+  };
+  const showSetting = () => {
+    setIsSettingOpen(true);
+  };
+  const onClose = () => {
+    setIsConsoleOpen(false);
+  };
+  // setting
+  const onCancel = () => {
+    setIsSettingOpen(false);
+  };
 
   return (
     <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
+      {/* 下拉控制台 console*/}
+      <div className={"horizontalCenterSon"}>
+        <CaretDownFilled onClick={showConsole} />
       </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+      <Typography.Title>core workspace</Typography.Title>
+
+      {/* 控制台 */}
+      <Console
+        open={isConsoleOpen}
+        onClose={onClose}
+        showSetting={showSetting}
+      />
+      <Setting open={isSettingOpen} onCancel={onCancel} />
     </>
   );
 }
