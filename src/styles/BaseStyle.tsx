@@ -1,3 +1,7 @@
+import { createGlobalStyle } from "styled-components";
+
+// 定义全局样式
+const BaseStyle = createGlobalStyle`
 .mx-auto {
   margin: 0 auto;
 }
@@ -15,3 +19,8 @@
 .cursor-pointer {
   cursor: pointer;
 }
+.test{
+}
+`;
+
+export default BaseStyle;

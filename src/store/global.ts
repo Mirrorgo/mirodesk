@@ -1,4 +1,4 @@
-import create from "zustand";
+import { create } from "zustand";
 
 type Config = {
   consoleConfig: {
@@ -26,6 +26,10 @@ const useConfigStore = create<ConfigState>((set) => ({
         {
           domain: "https://cowtransfer.com/",
           name: "奶牛快传",
+        },
+        {
+          domain: "drive.google.com",
+          name: "Google Drive",
         },
       ],
     },

@@ -1,5 +1,4 @@
 import { Typography } from "antd";
-import "./styles/base.less";
 import { useState } from "react";
 import { CaretDownFilled } from "@ant-design/icons";
 import Console from "./components/Console";

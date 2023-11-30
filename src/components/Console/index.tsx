@@ -1,12 +1,11 @@
 import { Button, Drawer, Space, Tooltip } from "antd";
 import { FC, useState } from "react";
-import settingLogo from "/public/setting.svg";
-import customizeLogo from "/public/customize.svg";
-import "/src/styles/base.less";
-import "./index.less";
+import settingLogo from "@/assets/setting.svg";
+import customizeLogo from "@/assets/customize.svg";
 import classnames from "classnames";
 import useConfigStore from "@/store/global";
 import { formatURL } from "@/utils/tools";
+import styled from "styled-components";
 
 type ConsoleProps = {
   open: boolean;
@@ -14,6 +13,10 @@ type ConsoleProps = {
   showSetting: () => void;
 };
 
+const Sites = styled.img`
+  width: 20px;
+  height: 20px;
+`;
 const Console: FC<ConsoleProps> = ({ open, onClose, showSetting }) => {
   const [isCustomizing, setIsCustomizing] = useState(false);
   const sites = useConfigStore((state) => state.configData.consoleConfig.sites);
@@ -41,7 +44,7 @@ const Console: FC<ConsoleProps> = ({ open, onClose, showSetting }) => {
           ) : (
             <Tooltip placement="bottom" title="Customize Console">
               {/* TODO：制作一个点击后往左快速移动然后消失图标，消失处和原位置之间会出现一些自定义用的工具，就像拉开卷轴一样 */}
-              <img
+              <Sites
                 onClick={() => setIsCustomizing(true)}
                 src={customizeLogo}
                 alt="customize logo"

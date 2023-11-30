@@ -1,7 +1,34 @@
 import { BaseSyntheticEvent, useEffect, useState } from "react";
-import "./index.less"; // 导入样式文件
 import useConfigStore from "@/store/global.ts";
+import styled from "styled-components";
+const CJsonEditor = styled.div`
+  display: flex;
+  .line-numbers {
+    width: 30px; /* 调整行号列的宽度 */
+    background-color: #f4f4f4;
+    padding: 8px;
+    border-right: 1px solid #ddd;
+    /* 其他样式根据需要自行调整 */
+  }
 
+  .line-number {
+    // TODO: 有没有更好的控制行高行距的方法
+    font-size: 12px;
+    color: #999;
+    line-height: 17px;
+  }
+
+  .json-textarea {
+    flex: 1;
+    min-height: 200px;
+    outline: none;
+    border: 1px solid #ccc;
+    border-left: none;
+    border-radius: 0;
+    padding: 8px;
+    resize: none;
+  }
+`;
 const JsonEditor = () => {
   // TODO: 支持json格式化
   const [jsonValue, setJsonValue] = useState(""); // 初始化为空字符串
@@ -26,7 +53,7 @@ const JsonEditor = () => {
   const lines = jsonValue.split("\n");
 
   return (
-    <div className="json-editor">
+    <CJsonEditor>
       <div className="line-numbers">
         {/* 生成行号 */}
         {lines.map((_line, index) => (
@@ -40,7 +67,7 @@ const JsonEditor = () => {
         value={jsonValue}
         onChange={handleInputChange}
       />
-    </div>
+    </CJsonEditor>
   );
 };
 
