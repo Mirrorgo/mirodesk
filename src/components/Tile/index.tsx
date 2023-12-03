@@ -1,11 +1,11 @@
-import { FC, PropsWithChildren, useState } from "react";
+import { FC, MouseEvent, PropsWithChildren, useState } from "react";
 
-const Tile: FC<PropsWithChildren<{ id: string }>> = ({ id, children }) => {
+const Tile: FC<PropsWithChildren<{ id: string }>> = ({ children }) => {
   const [isDragging, setIsDragging] = useState(false);
   const [position, setPosition] = useState({ x: 0, y: 0 });
   const [offset, setOffset] = useState({ x: 0, y: 0 });
 
-  const handleMouseDown = (e) => {
+  const handleMouseDown = (e: MouseEvent<HTMLDivElement>) => {
     setIsDragging(true);
     setOffset({
       x: e.clientX - position.x,
@@ -17,7 +17,7 @@ const Tile: FC<PropsWithChildren<{ id: string }>> = ({ id, children }) => {
     setIsDragging(false);
   };
 
-  const handleMouseMove = (e) => {
+  const handleMouseMove = (e: MouseEvent<HTMLDivElement>) => {
     if (isDragging) {
       setPosition({
         x: e.clientX - offset.x,
