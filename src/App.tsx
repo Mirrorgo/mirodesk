@@ -94,6 +94,8 @@ function App() {
           backgroundColor: "yellow",
           top: topValue,
           transition: "top .3s ease-out",
+          // 防止下拉刷新
+          overscrollBehavior: "none",
         }}
         className={status}
       >
