@@ -86,7 +86,12 @@ function App() {
   }
 
   return (
-    <>
+    <div
+      style={{
+        // 防止下拉刷新
+        overscrollBehavior: "none",
+      }}
+    >
       <div
         style={{
           height: "200px",
@@ -94,8 +99,6 @@ function App() {
           backgroundColor: "yellow",
           top: topValue,
           transition: "top .3s ease-out",
-          // 防止下拉刷新
-          overscrollBehavior: "none",
         }}
         className={status}
       >
@@ -129,7 +132,7 @@ function App() {
         />
         <Setting open={isSettingOpen} onCancel={onCancel} />
       </>
-    </>
+    </div>
   );
 }
 
